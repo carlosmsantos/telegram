@@ -1,0 +1,140 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\diacono;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class DiaconoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function provisao(Request $request)
+    {
+        $matricula = $request->get('matricula');
+        $diaconos  = DB::table('diacono')
+            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
+            ->join('provisao', 'provisao.idprovisao', '=', 'diacono.idprovisao')
+            ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
+            ->join('situacao', 'situacao.idsituacao', '=', 'diacono.idsituacao')
+            ->where('matricula', '=', $matricula)
+            ->get();
+
+        return $diaconos;
+    }
+
+    public function situacao(){
+
+        $situacao = DB::table('diacono')
+            ->selectRaw('situacao.descricao as situacao, count(*) as total')
+            ->leftJoin('situacao', 'diacono.idsituacao', '=', 'situacao.idsituacao')
+            ->groupBy('situacao.descricao')
+            ->get();
+        return $situacao;
+
+    }
+
+    public function ordenacao(){
+
+        $ordenacao = DB::table('diacono')
+            ->selectRaw('year(diacono.ordenacao) as ano, count(*) as total')
+            ->groupBy('ano')
+            ->orderBy('ano','DESC')
+            ->get();
+        return $ordenacao;
+    }
+
+    public function setor(){
+
+        $setor = DB::table('diacono')
+            ->selectRaw('local.setor as setor, count(*) as total')
+            ->leftJoin('provisao', 'diacono.idprovisao', '=', 'provisao.idprovisao')
+            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
+            ->groupBy('setor')
+            ->orderBy('setor','ASC')
+            ->get();
+        return $setor;
+    }
+
+    public function vicariato(){
+        $vicariato['results'] = DB::table('diacono')
+            ->selectRaw('vicariato.descricao as vicariato, count(*) as total')
+            ->leftJoin('provisao', 'diacono.idprovisao', '=', 'provisao.idprovisao')
+            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
+            ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
+            ->groupBy('vicariato')
+            ->orderBy('vicariato','ASC')
+            ->get();
+        return $vicariato;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
