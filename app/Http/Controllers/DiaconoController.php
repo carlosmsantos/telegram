@@ -16,31 +16,27 @@ class DiaconoController extends Controller
     public function provisao(Request $request)
     {
         $matricula = $request->get('matricula');
-        $diaconos  = DB::table('diacono')
+        $diaconos['results']  = DB::table('diacono')
             ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
             ->join('provisao', 'provisao.idprovisao', '=', 'diacono.idprovisao')
             ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
             ->join('situacao', 'situacao.idsituacao', '=', 'diacono.idsituacao')
             ->where('matricula', '=', $matricula)
             ->get();
-
         return $diaconos;
     }
 
     public function situacao(){
-
-        $situacao = DB::table('diacono')
+        $situacao['results'] = DB::table('diacono')
             ->selectRaw('situacao.descricao as situacao, count(*) as total')
             ->leftJoin('situacao', 'diacono.idsituacao', '=', 'situacao.idsituacao')
             ->groupBy('situacao.descricao')
             ->get();
         return $situacao;
-
     }
 
     public function ordenacao(){
-
-        $ordenacao = DB::table('diacono')
+        $ordenacao['results'] = DB::table('diacono')
             ->selectRaw('year(diacono.ordenacao) as ano, count(*) as total')
             ->groupBy('ano')
             ->orderBy('ano','DESC')
@@ -49,8 +45,7 @@ class DiaconoController extends Controller
     }
 
     public function setor(){
-
-        $setor = DB::table('diacono')
+        $setor['results'] = DB::table('diacono')
             ->selectRaw('local.setor as setor, count(*) as total')
             ->leftJoin('provisao', 'diacono.idprovisao', '=', 'provisao.idprovisao')
             ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
