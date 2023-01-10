@@ -15,13 +15,14 @@ class DiaconoController extends Controller
      */
     public function provisao(Request $request)
     {
-        $matricula = $request->get('matricula');
+//        $matricula = $request->get('matricula');
         $diaconos['results']  = DB::table('diacono')
             ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
             ->join('provisao', 'provisao.idprovisao', '=', 'diacono.idprovisao')
             ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
             ->join('situacao', 'situacao.idsituacao', '=', 'diacono.idsituacao')
-            ->where('matricula', '=', $matricula)
+//            ->where('matricula', '=', $matricula)
+            ->select('diacono.nome', 'diacono.imagemCLoud', 'provisao.descricao as provisionado ')
             ->get();
         return $diaconos;
     }
