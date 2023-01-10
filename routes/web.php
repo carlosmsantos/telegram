@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiaconoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/diaconos',[DiaconoController::class, 'provisao']);
+Route::get('/situacao',[DiaconoController::class, 'situacao']);
+Route::get('/ordenacao',[DiaconoController::class, 'ordenacao']);
+Route::get('/setor',[DiaconoController::class, 'setor']);
+Route::get('/vicariato',[DiaconoController::class, 'vicariato']);
+
+//Route::resource('/series', SeriesController::class)
+//    ->except(['show']);
