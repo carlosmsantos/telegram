@@ -20,7 +20,7 @@ class DiaconoController extends Controller
             ->join('provisao', 'provisao.idprovisao', '=', 'diacono.idprovisao')
             ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
             ->join('situacao', 'situacao.idsituacao', '=', 'diacono.idsituacao')
-            ->select('diacono.nome', 'diacono.imagemCLoud', 'provisao.descricao')
+            ->select('diacono.nome','diacono.imagemCLoud','diacono.matricula','provisao.descricao')
             ->get();
         return $diaconos;
     }
