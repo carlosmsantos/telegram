@@ -34,6 +34,7 @@ class DiaconoController extends Controller
             ->selectRaw('situacao.descricao as situacao, count(*) as total')
             ->leftJoin('situacao', 'diacono.idsituacao', '=', 'situacao.idsituacao')
             ->groupBy('situacao.descricao')
+            ->orderBy('situacao.descricao','ASC')
             ->get();
         return $situacao;
     }
