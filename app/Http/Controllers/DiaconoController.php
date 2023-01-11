@@ -23,7 +23,7 @@ class DiaconoController extends Controller
             ->select('diacono.nome','diacono.imagemCLoud','diacono.matricula',
                 DB::raw("DATE_FORMAT(diacono.ordenacao, '%Y') as ordenado"),
                 DB::raw("CEILING(TIMESTAMPDIFF(YEAR, diacono.nascimento, CURDATE())) as  idade"),
-            'situacao.descricao as situacao')
+            'situacao.descricao as situacao', 'provisao.descricao as provisao')
             ->orderBy('diacono.nome','ASC')
             ->get();
         return $diaconos;
