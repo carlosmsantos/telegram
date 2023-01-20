@@ -2,73 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DiaconosFormRequest;
 use App\Models\diacono;
+use App\Repositories\DiaconosRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DiaconoController extends Controller
 {
+
+    public function __construct(private DiaconosRepository $repository)
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function provisao(Request $request)
+    public function provisao(DiaconosFormRequest $request, DiaconosRepository $repository)
     {
-        $diaconos['results']  = DB::table('diacono')
-            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
-            ->join('provisao', 'provisao.idprovisao', '=', 'diacono.idprovisao')
-            ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
-            ->join('situacao', 'situacao.idsituacao', '=', 'diacono.idsituacao')
-            ->select('diacono.nome','diacono.imagemCLoud','diacono.matricula',
-                DB::raw("DATE_FORMAT(diacono.ordenacao, '%Y') as ordenado"),
-                DB::raw("CEILING(TIMESTAMPDIFF(YEAR, diacono.nascimento, CURDATE())) as  idade"),
-            'situacao.descricao as situacao', 'provisao.descricao as provisao')
-            ->orderBy('diacono.nome','ASC')
-            ->get();
-        return $diaconos;
+        return $repository->provisao($request);
     }
 
-    public function situacao(){
-        $situacao['results'] = DB::table('diacono')
-            ->selectRaw('situacao.descricao as situacao, count(*) as total')
-            ->leftJoin('situacao', 'diacono.idsituacao', '=', 'situacao.idsituacao')
-            ->groupBy('situacao.descricao')
-            ->orderBy('situacao.descricao','ASC')
-            ->get();
-        return $situacao;
+    public function situacao(DiaconosFormRequest $request, DiaconosRepository $repository)
+    {
+        return $repository->situacao($request);
     }
 
-    public function ordenacao(){
-        $ordenacao['results'] = DB::table('diacono')
-            ->selectRaw('year(diacono.ordenacao) as ano, count(*) as total')
-            ->groupBy('ano')
-            ->orderBy('ano','DESC')
-            ->get();
-        return $ordenacao;
+    public function ordenacao(DiaconosFormRequest $request, DiaconosRepository $repository)
+    {
+        return $repository->ordenacao($request);
     }
 
-    public function setor(){
-        $setor['results'] = DB::table('diacono')
-            ->selectRaw('local.setor as setor, count(*) as total')
-            ->leftJoin('provisao', 'diacono.idprovisao', '=', 'provisao.idprovisao')
-            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
-            ->groupBy('setor')
-            ->orderBy('setor','ASC')
-            ->get();
-        return $setor;
+    public function setor(DiaconosFormRequest $request, DiaconosRepository $repository)
+    {
+        return $repository->setor($request);
     }
 
-    public function vicariato(){
-        $vicariato['results'] = DB::table('diacono')
-            ->selectRaw('vicariato.descricao as vicariato, count(*) as total')
-            ->leftJoin('provisao', 'diacono.idprovisao', '=', 'provisao.idprovisao')
-            ->join('local', 'diacono.idlocal', '=', 'local.idlocal')
-            ->join('vicariato', 'vicariato.idvicariato', '=', 'local.idvicariato')
-            ->groupBy('vicariato')
-            ->orderBy('vicariato','ASC')
-            ->get();
-        return $vicariato;
+    public function vicariato(DiaconosFormRequest $request, DiaconosRepository $repository)
+    {
+        return $repository->vicariato($request);
     }
 
     /**
