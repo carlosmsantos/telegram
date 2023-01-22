@@ -16,21 +16,10 @@ class ConvidadoController extends Controller
     {
         $codigo = $request->get('codigo');
         $convidado['results']  = DB::table('convidado')
-            ->select('idconvidado','nome', 'qtdeadulto', 'qtdecrianca')
+            ->select('idconvidado','nome', 'qtdeadulto', 'qtdecrianca', 'flgativo')
             ->where('fonecelular', '=', $codigo)
             ->get();
             return $convidado;
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -73,9 +62,15 @@ class ConvidadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dd($request->all());
+
+        $affected = DB::update(
+            'update convidado set qtdeadulto = 1, qtdecrianca = 0 where fonecelular = ?',
+            [$request->codigo]
+        );
+
     }
 
     /**
