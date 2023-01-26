@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConvidadosFormRequest;
+use App\Repositories\ConvidadosRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ConvidadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $codigo = $request->get('codigo');
-        $convidado['results']  = DB::table('convidado')
-            ->select('idconvidado','nome', 'qtdeadulto', 'qtdecrianca', 'flgativo')
-            ->where('fonecelular', '=', $codigo)
-            ->get();
-            return $convidado;
+    public function __construct(private ConvidadosRepository $repository){
+
     }
+
+    public function index(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->index($request);
+    }
+
+    public function validarAcesso(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->validarAcesso($request);
+    }
+
+    public function retornaCriancas(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->retornaCriancas($request);
+    }
+
+    public function retornaAdultos(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->retornaAdultos($request);
+    }
+
 
     /**
      * Store a newly created resource in storage.

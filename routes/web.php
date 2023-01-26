@@ -23,5 +23,12 @@ Route::get('/situacao',[DiaconoController::class, 'situacao']);
 Route::get('/ordenacao',[DiaconoController::class, 'ordenacao']);
 Route::get('/setor',[DiaconoController::class, 'setor']);
 Route::get('/vicariato',[DiaconoController::class, 'vicariato']);
+
 Route::get('/convidado',[ConvidadoController::class, 'index']);
 Route::get('/confirmar',[ConvidadoController::class, 'update']);
+Route::get('/acesso',[ConvidadoController::class, 'validarAcesso']);
+Route::get('/adultos',[ConvidadoController::class, 'retornaAdultos']);
+Route::get('/criancas',[ConvidadoController::class, 'retornaCriancas']);
+
+
+
