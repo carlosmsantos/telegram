@@ -10,4 +10,6 @@ interface ConvidadosRepository
     public function validarAcesso(ConvidadosFormRequest $request);
     public function retornaAdultos(ConvidadosFormRequest $request);
     public function retornaCriancas(ConvidadosFormRequest $request);
+    public function apenasPrincipal(ConvidadosFormRequest $request);
+    public function cancelarTodos(ConvidadosFormRequest $request);
 }

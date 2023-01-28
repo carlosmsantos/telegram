@@ -29,6 +29,8 @@ Route::get('/confirmar',[ConvidadoController::class, 'update']);
 Route::get('/acesso',[ConvidadoController::class, 'validarAcesso']);
 Route::get('/adultos',[ConvidadoController::class, 'retornaAdultos']);
 Route::get('/criancas',[ConvidadoController::class, 'retornaCriancas']);
+Route::get('/apenas',[ConvidadoController::class, 'apenasPrincipal']);
+Route::get('/cancelar',[ConvidadoController::class, 'cancelarTodos']);
 
 
 
