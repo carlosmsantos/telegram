@@ -33,6 +33,16 @@ class ConvidadoController extends Controller
         return $repository->retornaAdultos($request);
     }
 
+    public function apenasPrincipal(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->apenasPrincipal($request);
+    }
+
+    public function cancelarTodos(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->cancelarTodos($request);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -74,16 +84,16 @@ class ConvidadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        dd($request->all());
-
-        $affected = DB::update(
-            'update convidado set qtdeadulto = 1, qtdecrianca = 0 where fonecelular = ?',
-            [$request->codigo]
-        );
-
-    }
+//    public function update(Request $request)
+//    {
+//        dd($request->all());
+//
+//        $affected = DB::update(
+//            'update convidado set qtdeadulto = 1, qtdecrianca = 0 where fonecelular = ?',
+//            [$request->codigo]
+//        );
+//
+//    }
 
     /**
      * Remove the specified resource from storage.

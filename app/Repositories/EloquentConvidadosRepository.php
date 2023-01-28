@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\ConvidadosFormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EloquentConvidadosRepository implements ConvidadosRepository
@@ -51,4 +52,16 @@ class EloquentConvidadosRepository implements ConvidadosRepository
         return $totalcrianca;
     }
 
+    public function apenasPrincipal(ConvidadosFormRequest $request)
+    {
+        DB::update('update convidado set qtdeadulto = 1, qtdecrianca = 0
+        where fonecelular = ?',[$request->codigo]);
+    }
+
+    public function cancelarTodos(ConvidadosFormRequest $request)
+    {
+        DB::update(
+            'update convidado set flgativo = 0
+        where fonecelular = ?',[$request->codigo]);
+    }
 }
