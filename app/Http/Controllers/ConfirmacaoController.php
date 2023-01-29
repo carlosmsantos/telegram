@@ -14,7 +14,8 @@ class ConfirmacaoController extends Controller
 
     public function retornaConfirmacao(ConfirmacaoFormRequest $request, ConfirmacaoRepository $repository)
     {
-        return $repository->retornaConfirmacao($request);
+        $res = $repository->retornaConfirmacao($request);
+        return $res[0]->flgsituacao;
     }
 
     public function alterarSituacao(ConfirmacaoFormRequest $request, ConfirmacaoRepository $repository)

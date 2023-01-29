@@ -14,7 +14,6 @@ class EloquentConfirmacaoRepository implements ConfirmacaoRepository
             ->select('flgsituacao')
             ->where('fonecelular', '=', $codigo)
             ->get();
-
         return $confirmacao;
     }
 
