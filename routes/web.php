@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ConvidadoController;
+use App\Http\Controllers\ConfirmacaoController;
 use App\Http\Controllers\DiaconoController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,10 @@ Route::get('/adultos',[ConvidadoController::class, 'retornaAdultos']);
 Route::get('/criancas',[ConvidadoController::class, 'retornaCriancas']);
 Route::get('/apenas',[ConvidadoController::class, 'apenasPrincipal']);
 Route::get('/cancelar',[ConvidadoController::class, 'cancelarTodos']);
+Route::get('/situacao',[ConfirmacaoController::class, 'retornaConfirmacao']);
+
+Route::get('/situacaoconvite',[ConfirmacaoController::class, 'alterarSituacao']);
+
 
 
 
