@@ -196,7 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\DiaconosRepositoryProvider::class,
         App\Providers\ConvidadosRepositoryProvider::class,
-
+        App\Providers\ConfirmacaoRepositoryProvider::class,
     ],
 
     /*

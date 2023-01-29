@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Http\Requests\ConvidadosFormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EloquentConvidadosRepository implements ConvidadosRepository

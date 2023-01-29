@@ -84,16 +84,7 @@ class ConvidadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-//    public function update(Request $request)
-//    {
-//        dd($request->all());
-//
-//        $affected = DB::update(
-//            'update convidado set qtdeadulto = 1, qtdecrianca = 0 where fonecelular = ?',
-//            [$request->codigo]
-//        );
-//
-//    }
+
 
     /**
      * Remove the specified resource from storage.
