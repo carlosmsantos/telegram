@@ -43,6 +43,11 @@ class ConvidadoController extends Controller
         return $repository->cancelarTodos($request);
     }
 
+    public function alterarQuantidade(ConvidadosFormRequest $request, ConvidadosRepository $repository)
+    {
+        return $repository->alterarQuantidade($request);
+    }
+
 
     /**
      * Store a newly created resource in storage.

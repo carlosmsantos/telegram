@@ -24,4 +24,6 @@ class EloquentConfirmacaoRepository implements ConfirmacaoRepository
             'update confirmacao set flgsituacao = '.$situacao.' where fonecelular = ?',[$request->codigo]);
     }
 
+
+
 }

@@ -12,4 +12,5 @@ interface ConvidadosRepository
     public function retornaCriancas(ConvidadosFormRequest $request);
     public function apenasPrincipal(ConvidadosFormRequest $request);
     public function cancelarTodos(ConvidadosFormRequest $request);
+    public function alterarQuantidade(ConvidadosFormRequest $request);
 }
