@@ -11,7 +11,7 @@ class EloquentConvidadosRepository implements ConvidadosRepository
     {
         $codigo = $request->get('codigo');
         $convidado['results'] = DB::table('convidado')
-            ->select('idconvidado','nome', 'qtdeadulto', 'qtdecrianca', 'flgativo')
+            ->select('ordem', 'idconvidado','nome', 'qtdeadulto', 'qtdecrianca', 'flgativo')
             ->where('fonecelular', '=', $codigo)
             ->where('flgativo', '<>', 0)
             ->get();
