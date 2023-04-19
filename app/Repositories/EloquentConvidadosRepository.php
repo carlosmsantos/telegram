@@ -40,6 +40,8 @@ class EloquentConvidadosRepository implements ConvidadosRepository
     public function retornaAdultos(ConvidadosFormRequest $request){
         $totalpagantes = DB::table('convidado')
             ->select(DB::Raw('SUM(qtdeadulto) as adulto '), DB::Raw('SUM(qtdecrianca) as crianca '))
+            ->where('flgativo', '=', 0)
+
             ->get();
         return $totalpagantes;
     }
