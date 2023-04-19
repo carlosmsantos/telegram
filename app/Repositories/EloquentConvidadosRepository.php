@@ -59,8 +59,6 @@ class EloquentConvidadosRepository implements ConvidadosRepository
 
     public function alterarQuantidade(ConvidadosFormRequest $request)
     {
-        echo $request->get('qtde') . 'segundo' ;die();
-        //$qtde = $request->get('qtde');
         DB::update('update convidado set qtdeadulto = '.$qtde.'
         where fonecelular = ?',[$request->codigo]);
     }
